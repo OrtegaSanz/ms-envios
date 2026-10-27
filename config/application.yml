@@ -1,0 +1,15 @@
+# ============================================================
+#  Este archivo simula el ConfigMap ms-envios-config montado en /config.
+#
+#  TODO 4: escribe el bloque  envios:  con los 6 valores de la seccion 5.2
+#          del enunciado (moneda y las 5 claves que cambian).
+# ============================================================
+
+envios:
+  moneda: PEN
+  tarifa-base: 8.00
+  costo-por-kg: 2.50
+  recargo-express: 0.30
+  envio-gratis-desde: 150.00
+  peso-maximo-kg: 30
+

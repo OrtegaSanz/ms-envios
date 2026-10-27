@@ -1,0 +1,22 @@
+# TODO 5: escribe el ConfigMap
+#   - apiVersion v1, kind ConfigMap
+#   - metadata.name: ms-envios-config   (y la etiqueta app: ms-envios)
+#   - data: una sola clave  application.yml  cuyo valor (con | ) es
+#     exactamente el contenido de config/application.yml
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: ms-envios-config
+  labels:
+    app: ms-envios
+
+data:
+  application.yml: |
+    envios:
+      moneda: PEN
+      tarifa-base: 8.00
+      costo-por-kg: 2.50
+      recargo-express: 0.30
+      envio-gratis-desde: 150.00
+      peso-maximo-kg: 30
+

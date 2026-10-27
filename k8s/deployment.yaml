@@ -1,0 +1,48 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: ms-envios
+  labels:
+    app: ms-envios
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: ms-envios
+  template:
+    metadata:
+      labels:
+        app: ms-envios
+    spec:
+      containers:
+        - name: ms-envios
+          image: ms-envios:1.0.0
+          imagePullPolicy: IfNotPresent
+          ports:
+            - containerPort: 8080
+          # TODO 7: bloque env con SPRING_CONFIG_ADDITIONAL_LOCATION = "file:/config/"
+          env:
+            - name: SPRING_CONFIG_ADDITIONAL_LOCATION
+              value: "file:/config/"
+          # TODO 8: en el mismo bloque env, COURIER_API_TOKEN con valueFrom.secretKeyRef
+          #         (name: ms-envios-secret, key: api-token)
+            - name: COURIER_API_TOKEN
+              valueFrom:
+                secretKeyRef:
+                  name: ms-envios-secret
+                  key: api-token
+          # TODO 9 (a): volumeMounts: el volumen "config" en /config, readOnly, SIN subPath
+          volumeMounts:
+            - name: config
+              mountPath: /config
+              readOnly: true
+          readinessProbe:
+            httpGet:
+              path: /actuator/health
+              port: 8080
+            initialDelaySeconds: 10
+      # TODO 9 (b): volumes: un volumen "config" de tipo configMap con name ms-envios-config
+      volumes:
+        - name: config
+          configMap:
+            name: ms-envios-config

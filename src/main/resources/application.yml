@@ -1,0 +1,28 @@
+# ============================================================
+#  ms-envios . RutaExpress
+#  Valores POR DEFECTO: viajan dentro del jar.
+#  No cambies los valores del bloque envios: los nuevos van en config/.
+# ============================================================
+spring:
+  application:
+    name: ms-envios
+
+server:
+  port: 8080
+
+envios:
+  moneda: PEN
+  tarifa-base: 10.00
+  costo-por-kg: 3.00
+  recargo-express: 0.25
+  envio-gratis-desde: 200.00
+  peso-maximo-kg: 25
+
+# TODO 3 (RN-06): este token NO puede quedar aqui. Elimina el bloque courier
+#                 completo: el valor llegara del Secret como COURIER_API_TOKEN.
+
+management:
+  endpoints:
+    web:
+      exposure:
+        include: health,info

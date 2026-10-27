@@ -1,0 +1,26 @@
+### Configuracion activa
+GET http://localhost:8080/api/envios/config
+
+### Normal: 4 kg, compra 100  ->  18.00
+POST http://localhost:8080/api/envios/cotizar
+Content-Type: application/json
+
+{ "pesoKg": 4, "montoCompra": 100, "express": false }
+
+### Express: 4 kg, compra 100  ->  23.40
+POST http://localhost:8080/api/envios/cotizar
+Content-Type: application/json
+
+{ "pesoKg": 4, "montoCompra": 100, "express": true }
+
+### Envio gratis: 4 kg, compra 150  ->  0.00
+POST http://localhost:8080/api/envios/cotizar
+Content-Type: application/json
+
+{ "pesoKg": 4, "montoCompra": 150, "express": false }
+
+### Peso mayor al maximo  ->  400
+POST http://localhost:8080/api/envios/cotizar
+Content-Type: application/json
+
+{ "pesoKg": 31, "montoCompra": 50, "express": false }
